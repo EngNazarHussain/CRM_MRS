@@ -43,39 +43,70 @@ Future CustomDialog(BuildContext context) {
       onTap: () {
         Navigator.of(context).pop(); // This will close the dialog
       },
-      child: Image.asset(
-        "assets/icons/cross.png",
-        height: 40,
-      ),
+      child: Icon(Icons.close_rounded)
     ),
   ).show();
 }
 
-Future CustomAlertDialog(BuildContext context,
-    {required title,
-    required dialogType,
-    required description,
-    required function}) {
-  return AwesomeDialog(
+Future<void> CustomAlertDialog(
+  BuildContext context, {
+  required String title,
+  required DialogType dialogType,
+  required String description,
+  required VoidCallback function,
+}) {
+  return showDialog(
     context: context,
-    dialogType: dialogType,
-    animType: AnimType.bottomSlide,
-    dialogBorderRadius: BorderRadius.circular(50),
-    headerAnimationLoop: false,
-    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 12),
-    descTextStyle: TextStyle(
-      fontSize: dfFontSize,
-      fontWeight: FontWeight.w500,
-    ),
-    btnOkColor: appcolor,
-    title: title,
-    desc: description,
-    titleTextStyle: TextStyle(
-      fontSize: lgFontSize,
-      fontWeight: FontWeight.bold,
-    ),
-
-    btnOkOnPress: function, // Replace with your phone number},
-    btnOkText: "Okay",
-  ).show();
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(roundBtn),
+        ),
+        title: Text(
+          textAlign: TextAlign.center,
+          title,
+          style: TextStyle(
+            fontSize: lgFontSize,
+            fontWeight: FontWeight.bold,color: btnTextColor
+          ),
+        ),
+        content: Text(
+            textAlign: TextAlign.center,
+          description,
+          style: TextStyle(
+            fontSize: dfFontSize,
+            fontWeight: FontWeight.w400,color: btnTextColor
+          ),
+        ),
+        actions: [
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  function(); // Execute the provided function
+                  Navigator.of(context).pop(); // Optionally close the dialog
+                },
+                child: Text("Leave", style: TextStyle(color: dfColor),),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  minimumSize: Size(double.infinity, 50), // Full width button
+                ),
+              ),
+              SizedBox(height: 8), // Spacing between buttons
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text("Cancel", style: TextStyle(color: btnTextColor),),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  minimumSize: Size(double.infinity, 50), // Full width button
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
+    },
+  );
 }
