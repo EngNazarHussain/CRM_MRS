@@ -1,11 +1,14 @@
 // Import the libraries with a prefix
 // Hide CarouselController from one of the imports
 import 'package:crm_mrs_app/view/screens/dashboard/drawer/custom_drawer.dart';
+import 'package:crm_mrs_app/view/screens/job/new_job.dart';
 import 'package:crm_mrs_app/view/widgets/app_bar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crm_mrs_app/model/apis/api_client.dart';
 import 'package:crm_mrs_app/model/repository/auth_repo.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -129,12 +132,14 @@ class _DashboardState extends State<Dashboard> {
                   height: 10,
                 ),
                 // Today and Technicians Row
-                Row(
-                  children: [
-                    Expanded(child: _buildTodayCard()),
-                    SizedBox(width: 10),
-                    Expanded(child: _buildTechniciansCard()),
-                  ],
+                Container(
+                  child: Row(
+                    children: [
+                      Expanded(child: _buildTodayCard(scHeight)),
+                      SizedBox(width: 5),
+                      Expanded(child: _buildTechniciansCard(scHeight)),
+                    ],
+                  ),
                 ),
 
                 SizedBox(height: 16),
@@ -147,9 +152,9 @@ class _DashboardState extends State<Dashboard> {
                 // Jobs and Estimates Row
                 Row(
                   children: [
-                    Expanded(child: _buildJobsCard()),
+                    Expanded(child: _buildJobsCard(scHeight)),
                     SizedBox(width: 16),
-                    Expanded(child: _buildEstimatesCard()),
+                    Expanded(child: _buildEstimatesCard(scHeight)),
                   ],
                 ),
 
@@ -158,7 +163,7 @@ class _DashboardState extends State<Dashboard> {
                 // Invoices and Empty Space Row
                 Row(
                   children: [
-                    Expanded(child: _buildInvoicesCard()),
+                    Expanded(child: _buildInvoicesCard(scHeight)),
                     SizedBox(width: 16),
                     Expanded(
                       child: Container(), // Empty container to fill space
@@ -170,11 +175,22 @@ class _DashboardState extends State<Dashboard> {
 
             floatingActionButton: Container(
               decoration: BoxDecoration(
-                  color: appcolor,
-                  borderRadius: BorderRadius.all(Radius.circular(500))),
+                  color: greyColor,
+                  borderRadius: BorderRadius.all(Radius.circular(100))),
               child: FloatingActionButton(
-                onPressed: () {},
-                child: Icon(Icons.add),
+                shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(100),),
+                onPressed: () {
+                   Get.to(
+  () => NewJobPage(),
+);
+
+
+
+
+
+                },
+                child: Icon(Icons.add,),
                 backgroundColor: appcolor,
               ),
             ),
@@ -236,9 +252,9 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Widget _buildTodayCard() {
+  Widget _buildTodayCard(double scHeight) {
     return Container(
-      height: 214,
+      height: scHeight/3.7,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -303,9 +319,9 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Widget _buildTechniciansCard() {
+  Widget _buildTechniciansCard(double scHeight) {
     return Container(
-      height: 214,
+     height: scHeight/3.7,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -429,9 +445,9 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Widget _buildJobsCard() {
+  Widget _buildJobsCard(double scHeight) {
     return Container(
-      height: 155,
+     height: scHeight/3.75,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -468,14 +484,31 @@ class _DashboardState extends State<Dashboard> {
               // endIndent: marginLR,
               ),
           _buildDashboardItem('Deleted', '-3', Colors.orange),
+           Divider(
+              // indent: marginLR,
+              // endIndent: marginLR,
+              ),
+          Container(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'View ll',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.blue),
+                    ),
+                  ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildEstimatesCard() {
+  Widget _buildEstimatesCard(double scHeight) {
     return Container(
-      height: 155,
+       height: scHeight/3.75,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -494,7 +527,7 @@ class _DashboardState extends State<Dashboard> {
         children: [
           Text(
             'Estimates',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: btnTextColor),
           ),
           Divider(
               // indent: marginLR,
@@ -506,13 +539,27 @@ class _DashboardState extends State<Dashboard> {
               // indent: marginLR,
               // endIndent: marginLR,
               ),
+                Container(
+                    alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'View ll',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.blue),
+                    ),
+                  ),
+                ),
         ],
       ),
     );
   }
 
-  Widget _buildInvoicesCard() {
+  Widget _buildInvoicesCard(double scHeight) {
     return Container(
+      height: scHeight/3.9,
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -537,22 +584,37 @@ class _DashboardState extends State<Dashboard> {
               // indent: marginLR,
               // endIndent: marginLR,
               ),
-          _buildDashboardItem('Pending', '0.00 • 0 INVOICES', Colors.orange),
+          _buildInvoiceItem('\$0.00 ', ' • 0 INVOICES  ', ' Pending', Colors.orange),
           Divider(
               // indent: marginLR,
               // endIndent: marginLR,
               ),
-          _buildDashboardItem('Past due', '0.00 • 0 INVOICES', Colors.red),
+          _buildInvoiceItem('\$0.00 ' , ' • 0 INVOICES  ', 'Past due', Colors.red),
           Divider(
               // indent: marginLR,
               // endIndent: marginLR,
               ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'View all',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.blue),
+                    ),
+                  ),
+                ),
         ],
       ),
     );
   }
 
-  Widget _buildDashboardItem(String label, String value, Color color) {
+  Widget 
+  
+  _buildDashboardItem(String label, String value, Color color) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 0.0),
       child: Row(
@@ -571,7 +633,7 @@ class _DashboardState extends State<Dashboard> {
               SizedBox(width: 5),
               Text(
                 label,
-                style: TextStyle(fontSize: exXSmFontSize),
+                style: TextStyle(fontSize: exXSmFontSize-2, color: btnTextColor),
               ),
             ],
           ),
@@ -580,4 +642,37 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
+
+_buildInvoiceItem(String label, String value, String status, Color color) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 0.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+             
+              SizedBox(width: 5),
+                
+              Text(
+                label,
+                style: TextStyle(fontSize: exXSmFontSize-3, color: btnTextColor),
+              ),
+              Text(value,    style: TextStyle(fontSize: exXSmFontSize-3, color: blackColor),),
+               Container(
+              color: color.withOpacity(0.2), // Keep the color without additional opacity since Opacity widget handles it
+                 child: Text(
+                  status,
+                  style: TextStyle(fontSize: exXSmFontSize-3, color: color),
+                               ),
+               ),
+            ],
+          ),
+        
+        ],
+      ),
+    );
+  }
+
+
 }
