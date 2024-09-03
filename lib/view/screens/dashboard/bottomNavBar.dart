@@ -1,15 +1,12 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:crm_mrs_app/view/screens/clients/clients_list.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/complaint.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/dashboard.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/task.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/drawer/custom_drawer.dart';
-import 'package:crm_mrs_app/view/widgets/app_bar/custom_app_bar.dart';
-import 'package:crm_mrs_app/view/widgets/dialogs/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import '../../../constant.dart';
-import '../login/login.dart';
 
 class BottomNavBar extends StatefulWidget {
   static const routeName = '/bottomNavBar';
@@ -53,7 +50,7 @@ class _BottomNavBarState extends State<BottomNavBar>
       Complaint(),
       News(),
       Complaint(),
-      News(),
+      ClientsListScreen(),
     ];
   }
 

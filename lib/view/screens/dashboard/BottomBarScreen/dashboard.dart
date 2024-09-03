@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:crm_mrs_app/model/apis/api_client.dart';
 import 'package:crm_mrs_app/model/repository/auth_repo.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 

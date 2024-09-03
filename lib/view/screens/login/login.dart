@@ -3,11 +3,9 @@ import 'package:crm_mrs_app/model/resources/values_manager.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/bottomNavBar.dart';
 import 'package:crm_mrs_app/view/widgets/dialogs/custom_dialog.dart';
 import 'package:crm_mrs_app/view/widgets/dialogs/custom_snackbar.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'dart:io' show Platform;
 import '../../../constant.dart';
 

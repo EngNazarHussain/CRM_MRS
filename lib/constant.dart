@@ -32,6 +32,7 @@ const lightGrey1 = Color.fromRGBO(237, 237, 237, 1);
 const drakGreyColor1 = Color.fromRGBO(219, 218, 218, 1);
 const drakGreyColor = Color.fromRGBO(237, 237, 237, 1);
 const btnTextColor = Color.fromRGBO(0, 34, 69, 1);
+const btnTextLightColor = Color.fromRGBO(0, 35, 69, 0.65);
 const blackColor = Colors.black;
 const lightBlackColor = Color.fromARGB(255, 74, 73, 73);
 const redAlert = Color.fromRGBO(252, 235, 233, 1);

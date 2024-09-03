@@ -1,6 +1,4 @@
 import 'package:crm_mrs_app/constant.dart';
-import 'package:crm_mrs_app/view/screens/dashboard/drawer/custom_drawer.dart';
-import 'package:crm_mrs_app/view/widgets/dialogs/custom_dialog.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -90,6 +88,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           // ),
         ],
       ),
+     
+     
       actions: [
         Container(
           margin: EdgeInsets.only(right: marginLR),
