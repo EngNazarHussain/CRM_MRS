@@ -1,6 +1,10 @@
 import 'package:crm_mrs_app/constant.dart';
 import 'package:crm_mrs_app/view/screens/clients/client_detail_screen.dart';
+import 'package:crm_mrs_app/view/screens/clients/new_client.dart';
+import 'package:crm_mrs_app/view/screens/clients/search_clients.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class ClientsListScreen extends StatefulWidget {
   @override
@@ -143,23 +147,31 @@ class _ClientsListScreenState extends State<ClientsListScreen> {
         actions: [
           IconButton(
             icon: Icon(
-              Icons.search,
-              color: appcolor,
-            ),
-            onPressed: () {
-              // Search action
-            },
-          ),
-          IconButton(
-            icon: Icon(
               Icons.add,
               color: appcolor,
             ),
             onPressed: () {
               // Add action
+              Get.to(
+                () => NewClientPage(),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: appcolor,
+            ),
+            onPressed: () {
+              // Search action
+              Get.to(
+                () => SearchClients(),
+              );
             },
           ),
         ],
+     
+     
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(

@@ -178,18 +178,16 @@ class _DashboardState extends State<Dashboard> {
                   borderRadius: BorderRadius.all(Radius.circular(100))),
               child: FloatingActionButton(
                 shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(100),),
+                  borderRadius: BorderRadius.circular(100),
+                ),
                 onPressed: () {
-                   Get.to(
-  () => NewJobPage(),
-);
-
-
-
-
-
+                  Get.to(
+                    () => NewJobPage(),
+                  );
                 },
-                child: Icon(Icons.add,),
+                child: Icon(
+                  Icons.add,
+                ),
                 backgroundColor: appcolor,
               ),
             ),
@@ -227,8 +225,9 @@ class _DashboardState extends State<Dashboard> {
           child: Column(
             children: [
               Image.asset(
-                'assets/icons/app_icon.png', // Replace with your asset
-                height: 30,
+                'assets/images/ic_search.png',
+                height: 70,
+                width: 70,
               ),
               SizedBox(height: 10),
               Text(
@@ -253,7 +252,7 @@ class _DashboardState extends State<Dashboard> {
 
   Widget _buildTodayCard(double scHeight) {
     return Container(
-      height: scHeight/3.7,
+      height: scHeight / 3.7,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -320,7 +319,7 @@ class _DashboardState extends State<Dashboard> {
 
   Widget _buildTechniciansCard(double scHeight) {
     return Container(
-     height: scHeight/3.7,
+      height: scHeight / 3.7,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -359,8 +358,9 @@ class _DashboardState extends State<Dashboard> {
             child: Column(
               children: [
                 Image.asset(
-                  'assets/icons/app_icon.png', // Replace with your asset
+                  'assets/images/ic_search.png',
                   height: 50,
+                  width: 50,
                 ),
                 SizedBox(height: 5),
                 Text(
@@ -418,8 +418,9 @@ class _DashboardState extends State<Dashboard> {
             child: Column(
               children: [
                 Image.asset(
-                  'assets/icons/app_icon.png', // Replace with your asset
-                  height: 30,
+                  'assets/images/ic_search.png',
+                  height: 50,
+                  width: 50,
                 ),
                 SizedBox(height: 5),
                 Text(
@@ -446,7 +447,7 @@ class _DashboardState extends State<Dashboard> {
 
   Widget _buildJobsCard(double scHeight) {
     return Container(
-     height: scHeight/3.75,
+      height: scHeight / 3.75,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -483,22 +484,22 @@ class _DashboardState extends State<Dashboard> {
               // endIndent: marginLR,
               ),
           _buildDashboardItem('Deleted', '-3', Colors.orange),
-           Divider(
+          Divider(
               // indent: marginLR,
               // endIndent: marginLR,
               ),
           Container(
             alignment: Alignment.centerRight,
             child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'View ll',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.blue),
-                    ),
-                  ),
+              onPressed: () {},
+              child: Text(
+                'View ll',
+                style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.blue),
+              ),
+            ),
           ),
         ],
       ),
@@ -507,7 +508,7 @@ class _DashboardState extends State<Dashboard> {
 
   Widget _buildEstimatesCard(double scHeight) {
     return Container(
-       height: scHeight/3.75,
+      height: scHeight / 3.75,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -526,7 +527,8 @@ class _DashboardState extends State<Dashboard> {
         children: [
           Text(
             'Estimates',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: btnTextColor),
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: btnTextColor),
           ),
           Divider(
               // indent: marginLR,
@@ -538,19 +540,19 @@ class _DashboardState extends State<Dashboard> {
               // indent: marginLR,
               // endIndent: marginLR,
               ),
-                Container(
-                    alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'View ll',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.blue),
-                    ),
-                  ),
-                ),
+          Container(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                'View ll',
+                style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.blue),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -558,7 +560,7 @@ class _DashboardState extends State<Dashboard> {
 
   Widget _buildInvoicesCard(double scHeight) {
     return Container(
-      height: scHeight/3.9,
+      height: scHeight / 3.9,
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -583,37 +585,37 @@ class _DashboardState extends State<Dashboard> {
               // indent: marginLR,
               // endIndent: marginLR,
               ),
-          _buildInvoiceItem('\$0.00 ', ' • 0 INVOICES  ', ' Pending', Colors.orange),
+          _buildInvoiceItem(
+              '\$0.00 ', ' • 0 INVOICES  ', ' Pending', Colors.orange),
           Divider(
               // indent: marginLR,
               // endIndent: marginLR,
               ),
-          _buildInvoiceItem('\$0.00 ' , ' • 0 INVOICES  ', 'Past due', Colors.red),
+          _buildInvoiceItem(
+              '\$0.00 ', ' • 0 INVOICES  ', 'Past due', Colors.red),
           Divider(
               // indent: marginLR,
               // endIndent: marginLR,
               ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'View all',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.blue),
-                    ),
-                  ),
-                ),
+          Container(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                'View all',
+                style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.blue),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget 
-  
-  _buildDashboardItem(String label, String value, Color color) {
+  Widget _buildDashboardItem(String label, String value, Color color) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 0.0),
       child: Row(
@@ -632,7 +634,8 @@ class _DashboardState extends State<Dashboard> {
               SizedBox(width: 5),
               Text(
                 label,
-                style: TextStyle(fontSize: exXSmFontSize-2, color: btnTextColor),
+                style:
+                    TextStyle(fontSize: exXSmFontSize - 2, color: btnTextColor),
               ),
             ],
           ),
@@ -642,7 +645,7 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-_buildInvoiceItem(String label, String value, String status, Color color) {
+  _buildInvoiceItem(String label, String value, String status, Color color) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 0.0),
       child: Row(
@@ -650,28 +653,29 @@ _buildInvoiceItem(String label, String value, String status, Color color) {
         children: [
           Row(
             children: [
-             
               SizedBox(width: 5),
-                
               Text(
                 label,
-                style: TextStyle(fontSize: exXSmFontSize-3, color: btnTextColor),
+                style:
+                    TextStyle(fontSize: exXSmFontSize - 3, color: btnTextColor),
               ),
-              Text(value,    style: TextStyle(fontSize: exXSmFontSize-3, color: blackColor),),
-               Container(
-              color: color.withOpacity(0.2), // Keep the color without additional opacity since Opacity widget handles it
-                 child: Text(
+              Text(
+                value,
+                style:
+                    TextStyle(fontSize: exXSmFontSize - 3, color: blackColor),
+              ),
+              Container(
+                color: color.withOpacity(
+                    0.2), // Keep the color without additional opacity since Opacity widget handles it
+                child: Text(
                   status,
-                  style: TextStyle(fontSize: exXSmFontSize-3, color: color),
-                               ),
-               ),
+                  style: TextStyle(fontSize: exXSmFontSize - 3, color: color),
+                ),
+              ),
             ],
           ),
-        
         ],
       ),
     );
   }
-
-
 }

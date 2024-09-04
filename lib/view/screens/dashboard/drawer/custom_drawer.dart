@@ -1,5 +1,13 @@
 import 'package:crm_mrs_app/constant.dart';
+import 'package:crm_mrs_app/view/screens/Timesheets/time_sheet.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/bottomNavBar.dart';
+import 'package:crm_mrs_app/view/screens/estimate/search_estimate.dart';
+import 'package:crm_mrs_app/view/screens/invoices/invoices.dart';
+import 'package:crm_mrs_app/view/screens/job/search_job.dart';
+import 'package:crm_mrs_app/view/screens/login/login.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
@@ -74,7 +82,11 @@ class CustomDrawer extends StatelessWidget {
                         icon: Icons.access_time,
                         text: 'Timesheets',
                         color: Colors.red,
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAll(
+                            () => TimeSheetsScreen(),
+                          );
+                        },
                       ),
                       Divider(
                         endIndent: marginLR,
@@ -85,19 +97,31 @@ class CustomDrawer extends StatelessWidget {
                         icon: Icons.work_history_outlined,
                         text: 'Jobs',
                         color: btnTextColor,
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAll(
+                            () => SearchJobs(),
+                          );
+                        },
                       ),
                       _createDrawerItem(
                         icon: Icons.receipt_long_outlined,
                         text: 'Invoices',
                         color: btnTextColor,
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAll(
+                            () => SearchInvoices(),
+                          );
+                        },
                       ),
                       _createDrawerItem(
                         icon: Icons.assessment_outlined,
                         text: 'Estimates',
                         color: btnTextColor,
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAll(
+                            () => SearchEstimate(),
+                          );
+                        },
                       ),
                       Divider(
                         endIndent: marginLR,
@@ -120,7 +144,11 @@ class CustomDrawer extends StatelessWidget {
                         icon: Icons.logout_rounded,
                         text: 'Log out',
                         color: btnTextColor,
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAll(
+                            () => LogIn(),
+                          );
+                        },
                       ),
                     ],
                   ),

@@ -67,7 +67,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           IconButton(
             icon: Icon(
-              Icons.menu_sharp,
+              Icons.format_align_left_rounded,
               color: appcolor,
             ),
             onPressed: () {
@@ -88,8 +88,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           // ),
         ],
       ),
-     
-     
       actions: [
         Container(
           margin: EdgeInsets.only(right: marginLR),
