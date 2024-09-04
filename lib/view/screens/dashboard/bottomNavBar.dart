@@ -3,6 +3,7 @@ import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/complaint.dar
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/dashboard.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/task.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/drawer/custom_drawer.dart';
+import 'package:crm_mrs_app/view/screens/schedule/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -47,7 +48,7 @@ class _BottomNavBarState extends State<BottomNavBar>
     super.initState();
     _widgetOptions = [
       Dashboard(),
-      Complaint(),
+     ScheduleScreen (),
       News(),
       Complaint(),
       ClientsListScreen(),
@@ -63,9 +64,9 @@ class _BottomNavBarState extends State<BottomNavBar>
         initialTabString = "Schedule";
       } else if (index == 2) {
         initialTabString = "Message";
-      } else if (index == 2) {
+      } else if (index == 3) {
         initialTabString = "Call";
-      } else if (index == 2) {
+      } else if (index == 4) {
         initialTabString = "Clients";
       }
       print("Bottom bar Value : $index");

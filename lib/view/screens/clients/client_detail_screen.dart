@@ -171,11 +171,14 @@ class ClientDetailScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       horizontal: marginLR + marginLR, vertical: marginLR),
                   child: Expanded(
+                   
                     child: Column(
+                      crossAxisAlignment : CrossAxisAlignment.start,
                       children: [
                         _buildSectionTitle('Main address'),
                         _buildAddressInfo(
                             '5043 glenmeadow dr, houston, Texas 77096'),
+  Divider(), // Line separator
 
                         // Billing Address Section
                         SizedBox(height: 16),
@@ -188,9 +191,17 @@ class ClientDetailScreen extends StatelessWidget {
 
                         // Jobs, Invoices, Estimates, Client Notes
                         _buildListTile('Jobs', '0'),
+                          Divider(), // Line separator
+
                         _buildListTile('Invoices', '0'),
+                          Divider(), // Line separator
+
                         _buildListTile('Estimates', '1'),
+                          Divider(), // Line separator
+
                         _buildListTile('Client notes', '0'),
+                          Divider(), // Line separator
+
                       ],
                     ),
                   )),
@@ -205,7 +216,8 @@ class ClientDetailScreen extends StatelessWidget {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      textAlign: TextAlign.left,
+      style: TextStyle(fontSize: dfFontSize, fontWeight: FontWeight.bold),
     );
   }
 
@@ -218,9 +230,10 @@ class ClientDetailScreen extends StatelessWidget {
         Expanded(
           child: Text(
             address,
-            style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+            style: TextStyle(fontSize: exSmFontSize-2, color: btnTextLightColor),
           ),
         ),
+         Icon(Icons.arrow_forward_ios, color: Colors.grey, size: dfIconSize-5,),
       ],
     );
   }
@@ -230,12 +243,13 @@ class ClientDetailScreen extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: _getIconForTitle(title),
-      title: Text(title),
+      title: Text(title+' ($count)'),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('($count)'),
-          Icon(Icons.chevron_right),
+         // Text('($count)'),
+            Icon(Icons.arrow_forward_ios, color: Colors.grey, size: dfIconSize-5,),
+         // Icon(Icons.chevron_right),
         ],
       ),
     );
@@ -245,15 +259,15 @@ class ClientDetailScreen extends StatelessWidget {
   Icon _getIconForTitle(String title) {
     switch (title) {
       case 'Jobs':
-        return Icon(Icons.work, color: Colors.black);
+        return Icon(Icons.work, color: Colors.grey,);
       case 'Invoices':
-        return Icon(Icons.receipt, color: Colors.black);
+        return Icon(Icons.receipt, color: Colors.grey);
       case 'Estimates':
-        return Icon(Icons.assessment, color: Colors.black);
+        return Icon(Icons.assessment, color: Colors.grey);
       case 'Client notes':
-        return Icon(Icons.note, color: Colors.black);
+        return Icon(Icons.note, color: Colors.grey);
       default:
-        return Icon(Icons.info, color: Colors.black);
+        return Icon(Icons.info, color: Colors.grey);
     }
   }
 }
