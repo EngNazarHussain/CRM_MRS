@@ -163,6 +163,8 @@ class ClientDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              
+              
               SizedBox(height: 18),
 
               // Main Address Section

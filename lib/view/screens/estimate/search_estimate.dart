@@ -169,7 +169,7 @@ class _SearchEstimateState extends State<SearchEstimate> {
                           itemBuilder: (context, index) {
                             final estimate = estimateList[index];
                             return GestureDetector(
-                              onDoubleTap: () {
+                              onTap: () {
                                 Get.to(
                                   () => EstimateDetailsScreen(),
                                 );

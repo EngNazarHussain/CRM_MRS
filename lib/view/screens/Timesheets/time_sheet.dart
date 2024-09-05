@@ -213,6 +213,4 @@ class _TimeSheetsScreenState extends State<TimeSheetsScreen> {
       }
     });
   }
-
-
 }

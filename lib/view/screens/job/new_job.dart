@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:crm_mrs_app/constant.dart';
 import 'package:crm_mrs_app/view/widgets/dialogs/custom_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';  // Add this import for formatting dates and times
+import 'package:intl/intl.dart'; // Add this import for formatting dates and times
 
 class NewJobPage extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class NewJobPage extends StatefulWidget {
 class _NewJobPageState extends State<NewJobPage> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-   // Boolean to track the switch state
+  // Boolean to track the switch state
   bool isSwitchOn = false;
 
   // Function to pick a date
@@ -42,17 +42,19 @@ class _NewJobPageState extends State<NewJobPage> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: applightcolor,
         leading: IconButton(
-          icon: Icon(Icons.close_outlined, color: appcolor,),
+          icon: Icon(
+            Icons.close_outlined,
+            color: appcolor,
+          ),
           onPressed: () {
-
-
-           CustomAlertDialog(
+            CustomAlertDialog(
               context,
               title: 'Leave Page',
               dialogType: DialogType.noHeader,
@@ -65,50 +67,57 @@ class _NewJobPageState extends State<NewJobPage> {
             );
           },
         ),
-        title: Text('New job', style: TextStyle(color: appcolor, fontWeight: FontWeight.w600, fontSize: exSmFontSize),),
+        title: Text(
+          'New job',
+          style: TextStyle(
+              color: appcolor,
+              fontWeight: FontWeight.w600,
+              fontSize: exSmFontSize),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
             // Client details section
-            Text('Client details', style:TextStyle(color: btnTextColor)),
+            Text('Client details', style: TextStyle(color: btnTextColor)),
             SizedBox(height: 5),
             buildClientDetailsSection(),
             SizedBox(height: 5),
-            
+
             // Service location section
-            Text('Service location', style:TextStyle(color: btnTextColor)),
+            Text('Service location', style: TextStyle(color: btnTextColor)),
             SizedBox(height: 8),
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Address',
                 border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 10, horizontal: 12),
               ),
             ),
             SizedBox(height: 24),
 
             // Job details section
-            Text('Job details', style:TextStyle(color: btnTextColor)),
+            Text('Job details', style: TextStyle(color: btnTextColor)),
             SizedBox(height: 8),
             buildJobDetailsSection(),
             SizedBox(height: 24),
 
             // Schedule section
             Row(
-              mainAxisAlignment : MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Schedule', style:TextStyle(color: btnTextColor)),
-                 Switch(
-                  activeColor:  Colors.blue,
-              value: isSwitchOn,
-              onChanged: (value) {
-                setState(() {
-                  isSwitchOn = value; // Toggle the switch state
-                });
-              },
-            ),
+                Text('Schedule', style: TextStyle(color: btnTextColor)),
+                Switch(
+                  activeColor: Colors.blue,
+                  value: isSwitchOn,
+                  onChanged: (value) {
+                    setState(() {
+                      isSwitchOn = value; // Toggle the switch state
+                    });
+                  },
+                ),
               ],
             ),
             SizedBox(height: 8),
@@ -141,10 +150,10 @@ class _NewJobPageState extends State<NewJobPage> {
             labelText: 'Select existing client',
             border: OutlineInputBorder(),
             suffixIcon: Icon(Icons.search),
-             contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           ),
         ),
-        SizedBox(height:10),
+        SizedBox(height: 10),
         Row(
           children: [
             Expanded(
@@ -152,7 +161,8 @@ class _NewJobPageState extends State<NewJobPage> {
                 decoration: InputDecoration(
                   labelText: 'First name',
                   border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                 ),
               ),
             ),
@@ -162,7 +172,8 @@ class _NewJobPageState extends State<NewJobPage> {
                 decoration: InputDecoration(
                   labelText: 'Last name',
                   border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                 ),
               ),
             ),
@@ -173,7 +184,7 @@ class _NewJobPageState extends State<NewJobPage> {
           decoration: InputDecoration(
             labelText: 'Client company name',
             border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           ),
         ),
         SizedBox(height: 16),
@@ -181,7 +192,7 @@ class _NewJobPageState extends State<NewJobPage> {
           decoration: InputDecoration(
             labelText: 'Email address',
             border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           ),
         ),
         SizedBox(height: 16),
@@ -193,7 +204,8 @@ class _NewJobPageState extends State<NewJobPage> {
                 decoration: InputDecoration(
                   labelText: 'Phone number',
                   border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                 ),
               ),
             ),
@@ -203,7 +215,8 @@ class _NewJobPageState extends State<NewJobPage> {
                 decoration: InputDecoration(
                   labelText: 'Ext #',
                   border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                 ),
               ),
             ),
@@ -214,9 +227,14 @@ class _NewJobPageState extends State<NewJobPage> {
           alignment: Alignment.centerRight,
           child: TextButton.icon(
             onPressed: () {},
-            icon: Icon(Icons.add, color: Colors.blue,),
-            label: Text('Add number', style: TextStyle(color: Colors.blue),),
-            
+            icon: Icon(
+              Icons.add,
+              color: Colors.blue,
+            ),
+            label: Text(
+              'Add number',
+              style: TextStyle(color: Colors.blue),
+            ),
           ),
         ),
       ],
@@ -230,7 +248,7 @@ class _NewJobPageState extends State<NewJobPage> {
           decoration: InputDecoration(
             labelText: 'Job type',
             border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           ),
           items: [
             DropdownMenuItem(value: 'Job type 1', child: Text('Job type 1')),
@@ -243,7 +261,7 @@ class _NewJobPageState extends State<NewJobPage> {
           decoration: InputDecoration(
             labelText: 'Ad source',
             border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           ),
           items: [
             DropdownMenuItem(value: 'Source 1', child: Text('Source 1')),
@@ -257,7 +275,7 @@ class _NewJobPageState extends State<NewJobPage> {
           decoration: InputDecoration(
             labelText: 'Job description',
             border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           ),
         ),
       ],
@@ -276,7 +294,8 @@ class _NewJobPageState extends State<NewJobPage> {
                   labelText: 'Start date',
                   border: OutlineInputBorder(),
                   suffixIcon: Icon(Icons.calendar_today),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                 ),
                 onTap: () => _selectDate(context), // Open date picker on tap
                 controller: TextEditingController(
@@ -294,26 +313,19 @@ class _NewJobPageState extends State<NewJobPage> {
                   labelText: 'Start time',
                   border: OutlineInputBorder(),
                   suffixIcon: Icon(Icons.access_time),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                 ),
                 onTap: () => _selectTime(context), // Open time picker on tap
                 controller: TextEditingController(
-                  text: selectedTime != null
-                      ? selectedTime!.format(context)
-                      : '',
+                  text:
+                      selectedTime != null ? selectedTime!.format(context) : '',
                 ),
               ),
             ),
           ],
         ),
-      
       ],
     );
   }
-      
-      
-    
-  }
-
-
-
+}

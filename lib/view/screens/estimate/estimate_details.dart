@@ -321,6 +321,7 @@
 //   }
 // }
 import 'dart:io';
+import 'package:crm_mrs_app/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -332,18 +333,57 @@ class EstimateDetailsScreen extends StatefulWidget {
 class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
   File? _image;
   String? expandedSection; // Tracks the currently expanded section
-
+  // XFile? _image;
   final ImagePicker _picker = ImagePicker();
+
+  // Function to pick image from gallery or camera
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      final XFile? selectedImage = await _picker.pickImage(source: source);
+      if (selectedImage != null) {
+        // Convert XFile to File
+        final File imageFile = File(selectedImage.path);
+        setState(() {
+          _image = imageFile;
+        });
+      }
+    } catch (e) {
+      // Handle any errors here
+      print('Error picking image: $e');
+    }
+  }
+
   String description = '';
 
-  Future<void> _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path); // Convert XFile to File
-      });
-    }
+  // Function to show image picker options
+  void _showImagePickerOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Gallery'),
+                onTap: () {
+                  _pickImage(ImageSource.gallery);
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.photo_camera),
+                title: Text('Camera'),
+                onTap: () {
+                  _pickImage(ImageSource.camera);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _addDescription() {
@@ -376,22 +416,46 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
     );
   }
 
-  Widget buildSection(String section, Widget content) {
-    return Column(
-      children: [
-        ListTile(
-          title: Text(section),
-          trailing: Icon(expandedSection == section
-              ? Icons.expand_less
-              : Icons.expand_more),
-          onTap: () {
-            setState(() {
-              expandedSection =
-                  expandedSection == section ? null : section; // Toggle section
-            });
-          },
+  Widget buildSection(
+      String heading, String content, String btnText, String image) {
+    return ExpansionTile(
+      title: Row(
+        children: [
+          Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey),
+          SizedBox(width: 8),
+          Text(
+            heading,
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
+      initiallyExpanded: false,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              // Replace with your actual asset path or use a network image
+              Image.asset(
+                image,
+                height: 80,
+              ),
+              SizedBox(height: 16),
+              Text(
+                'No deposit was set for this estimate',
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+              SizedBox(height: 8),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Set estimate deposit',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+            ],
+          ),
         ),
-        if (expandedSection == section) content,
       ],
     );
   }
@@ -400,10 +464,28 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Estimate 1"),
+        backgroundColor: applightcolor,
+        title: Text(
+          "Estimate 1",
+          style: TextStyle(color: appcolor),
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: appcolor,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+            // Add create estimate functionality here
+          },
+        ),
+        titleSpacing: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.more_vert),
+            icon: Icon(
+              Icons.more_vert,
+              color: appcolor,
+            ),
             onPressed: () {},
           ),
         ],
@@ -413,12 +495,13 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Colors.grey[800],
+              //  color: Colors.grey[800],
               padding: EdgeInsets.all(16),
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: _pickImage, // Trigger image picker on tap
+                    onTap:
+                        _showImagePickerOptions, // Trigger image picker on tap
                     child: CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.grey.shade300,
@@ -434,11 +517,16 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          'Description',
+                          style: TextStyle(
+                              fontSize: dfFontSize, color: btnTextColor),
+                        ),
                         description.isNotEmpty
                             ? Text(
                                 description,
                                 style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
+                                    fontSize: 16, color: btnTextColor),
                               )
                             : Container(
                                 width: double.infinity,
@@ -448,8 +536,9 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
                         GestureDetector(
                           onTap: _addDescription, // Add description on tap
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Icon(Icons.add, color: Colors.blue),
+                              Icon(Icons.add, color: Colors.blue.shade400),
                               Text('Add', style: TextStyle(color: Colors.blue)),
                             ],
                           ),
@@ -460,14 +549,73 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
                 ],
               ),
             ),
+
+            // Client Name and Contact Information
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: marginSet + 5),
+              decoration: BoxDecoration(
+                  color: greyColor,
+                  borderRadius: BorderRadius.circular(roundCardView)),
+              padding: EdgeInsets.symmetric(
+                  horizontal: marginLR + marginLR, vertical: marginLR),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'name',
+                        style: TextStyle(
+                            fontSize: smFontSize + 2,
+                            fontWeight: FontWeight.w600,
+                            color: btnTextColor),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'long address of user .......',
+                        style: TextStyle(
+                            fontSize: exXSmFontSize + 2,
+                            color: btnTextLightColor),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 16),
+            Container(
+              margin: EdgeInsets.only(left: marginLR + 5),
+              child: Column(
+                children: [
+                  Text(
+                    'Status',
+                    style: TextStyle(
+                        fontSize: smFontSize,
+                        color: btnTextLightColor,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: 16),
             // Example Sections
-            buildSection("Items", Text("Item details here...")),
-            buildSection("Deposit", Text("Deposit details here...")),
-            buildSection("Payments", Text("Payment details here...")),
-            buildSection("Signatures", Text("Signature details here...")),
-            buildSection("Attachments", Text("Attachment details here...")),
-            buildSection("Notes (empty)", Text("Note details here...")),
+            buildSection("Items", "Item details here...", 'Add +',
+                'assets/images/ic_search.png'),
+            buildSection("Deposit", "Deposit details here...", 'Add +',
+                'assets/images/ic_search.png'),
+            buildSection("Payments", "Payment details here...", 'Add +',
+                'assets/images/ic_search.png'),
+            buildSection("Signatures", "Signature details here...", 'Add +',
+                'assets/images/ic_search.png'),
+            buildSection("Attachments", "Attachment details here...", 'Add +',
+                'assets/images/ic_search.png'),
+            buildSection("Notes (empty)", "Note details here...", 'Add +',
+                'assets/images/ic_search.png'),
           ],
         ),
       ),
@@ -479,14 +627,24 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text("Convert to job"),
+                child: Text(
+                  "Convert to job",
+                  style: TextStyle(color: btnTextColor),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: dfColor,
+                  // textStyle: TextStyle(color: blackColor)
+                ),
               ),
             ),
             SizedBox(width: 10),
             Expanded(
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text("Send to client"),
+                child: Text(
+                  "Send to client",
+                  style: TextStyle(color: btnTextColor),
+                ),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.yellow),
               ),
             ),
