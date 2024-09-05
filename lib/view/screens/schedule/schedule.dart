@@ -13,6 +13,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> with SingleTickerProvid
   final List<String> dates = ["1", "2", "3", "4", "5", "6", "7"];
   late TabController _tabController;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(); // Create GlobalKey
   @override
   void initState() {
     super.initState();
@@ -22,15 +24,28 @@ class _ScheduleScreenState extends State<ScheduleScreen> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.black87,
-        title: Column(
+        backgroundColor: applightcolor,
+        leading:  IconButton(
+            icon: Icon(
+              Icons.format_align_left_rounded,
+              color: appcolor,
+            ),
+            onPressed: () {
+              print('clicked');
+              _scaffoldKey.currentState
+                  ?.openDrawer(); // Use the key to open the drawer
+            },
+          ),
+        title: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            
             Text(
               'September',
               style: TextStyle(
-                color: Colors.yellow,
+                color: appcolor,
                 fontSize: 18,
               ),
             ),
@@ -40,17 +55,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> with SingleTickerProvid
         actions: [
           IconButton(
             icon: Icon(Icons.calendar_today),
-            color: Colors.yellow,
+            color: appcolor,
             onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.sync),
-            color: Colors.yellow,
+            color: appcolor,
             onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.search),
-            color: Colors.yellow,
+            color: appcolor,
             onPressed: () {},
           ),
         ],

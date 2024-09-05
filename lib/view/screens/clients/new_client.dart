@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:crm_mrs_app/constant.dart';
 import 'package:crm_mrs_app/view/widgets/dialogs/custom_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Add this import for formatting dates and times
+// Add this import for formatting dates and times
 
 class NewClientPage extends StatefulWidget {
   @override

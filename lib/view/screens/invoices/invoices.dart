@@ -1,12 +1,8 @@
 import 'package:crm_mrs_app/constant.dart';
 import 'package:crm_mrs_app/view/screens/clients/client_detail_screen.dart';
-import 'package:crm_mrs_app/view/screens/clients/new_client.dart';
-import 'package:crm_mrs_app/view/screens/clients/search_clients.dart';
-import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/dashboard.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/bottomNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:intl/intl.dart';
 
 class SearchInvoices extends StatefulWidget {
   @override
@@ -55,7 +51,7 @@ class _SearchInvoicesState extends State<SearchInvoices> {
           onPressed: () {
             print('clicked');
             Get.to(
-              () => Dashboard(),
+              () => BottomNavBar(),
             );
           },
         ),

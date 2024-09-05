@@ -1,13 +1,12 @@
 import 'package:crm_mrs_app/constant.dart';
 import 'package:crm_mrs_app/view/screens/Timesheets/time_sheet.dart';
-import 'package:crm_mrs_app/view/screens/dashboard/bottomNavBar.dart';
 import 'package:crm_mrs_app/view/screens/estimate/search_estimate.dart';
 import 'package:crm_mrs_app/view/screens/invoices/invoices.dart';
 import 'package:crm_mrs_app/view/screens/job/search_job.dart';
 import 'package:crm_mrs_app/view/screens/login/login.dart';
+import 'package:crm_mrs_app/view/screens/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
@@ -132,7 +131,13 @@ class CustomDrawer extends StatelessWidget {
                         icon: Icons.settings_outlined,
                         text: 'Settings',
                         color: btnTextColor,
-                        onTap: () {},
+                        onTap: () {
+
+ Get.offAll(
+                            () => SettingsScreen(),
+                          );
+                          
+                        },
                       ),
                       _createDrawerItem(
                         icon: Icons.help_outline_outlined,

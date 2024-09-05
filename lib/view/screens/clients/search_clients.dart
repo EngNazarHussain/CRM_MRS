@@ -1,9 +1,6 @@
 import 'package:crm_mrs_app/constant.dart';
 import 'package:crm_mrs_app/view/screens/clients/client_detail_screen.dart';
-import 'package:crm_mrs_app/view/screens/clients/new_client.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class SearchClients extends StatefulWidget {
   @override

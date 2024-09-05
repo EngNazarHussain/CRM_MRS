@@ -4,7 +4,6 @@ import 'package:crm_mrs_app/view/screens/clients/new_client.dart';
 import 'package:crm_mrs_app/view/screens/clients/search_clients.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class ClientsListScreen extends StatefulWidget {
   @override
@@ -128,16 +127,17 @@ class _ClientsListScreenState extends State<ClientsListScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu_sharp,
-            color: appcolor,
+        leading:  IconButton(
+            icon: Icon(
+              Icons.format_align_left_rounded,
+              color: appcolor,
+            ),
+            onPressed: () {
+              print('clicked');
+              _scaffoldKey.currentState
+                  ?.openDrawer(); // Use the key to open the drawer
+            },
           ),
-          onPressed: () {
-            print('clicked');
-            _scaffoldKey.currentState?.openDrawer();
-          },
-        ),
         titleSpacing: 0, // Closer title to the leading icon
         title: Text(
           'Clients',
