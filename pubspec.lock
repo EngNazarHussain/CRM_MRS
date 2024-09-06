@@ -137,35 +137,19 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  connectivity:
+  connectivity_plus:
     dependency: "direct main"
     description:
-      name: connectivity
-      sha256: a8e91263cf3e25fb5cc95e19dfde4999e32a648ac3b9e8a558a28165731678f8
+      name: connectivity_plus
+      sha256: "2056db5241f96cdc0126bd94459fc4cdc13876753768fc7a31c425e50a7177d0"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.6"
-  connectivity_for_web:
+    version: "6.0.5"
+  connectivity_plus_platform_interface:
     dependency: transitive
     description:
-      name: connectivity_for_web
-      sha256: "01a390c1d5adc2ed1fa1f52d120c07fe9fd01166a93f965a832fd6cfc0ea6482"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.0+1"
-  connectivity_macos:
-    dependency: transitive
-    description:
-      name: connectivity_macos
-      sha256: "51ae08d5162eca9669b9d8951ed83ce19c5355a81149f94e4dee2740beb93628"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.1+2"
-  connectivity_platform_interface:
-    dependency: transitive
-    description:
-      name: connectivity_platform_interface
-      sha256: "2d82e942df9d49f29a24bb07fb5ce085d4a53e47818c62364d2b6deb9e0d7a8e"
+      name: connectivity_plus_platform_interface
+      sha256: "42657c1715d48b167930d5f34d00222ac100475f73d10162ddf43e714932f204"
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
@@ -181,10 +165,10 @@ packages:
     dependency: transitive
     description:
       name: cross_file
-      sha256: fedaadfa3a6996f75211d835aaeb8fede285dae94262485698afd832371b9a5e
+      sha256: "7caf6a750a0c04effbb52a676dce9a4a592e10ad35c34d6d2d0e4811160d5670"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.3+8"
+    version: "0.3.4+2"
   crypto:
     dependency: transitive
     description:
@@ -604,10 +588,10 @@ packages:
     dependency: "direct main"
     description:
       name: http
-      sha256: a2bbf9d017fcced29139daa8ed2bba4ece450ab222871df93ca9eec6f80c34ba
+      sha256: b9c29a161230ee03d3ccf545097fccd9b87a5264228c5d348202e0f0c28f9010
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.2"
   http_parser:
     dependency: transitive
     description:
@@ -896,22 +880,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.4"
-  package_info:
+  package_info_plus:
     dependency: "direct main"
     description:
-      name: package_info
-      sha256: "6c07d9d82c69e16afeeeeb6866fe43985a20b3b50df243091bfc4a4ad2b03b75"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
-  package_info_plus:
-    dependency: transitive
-    description:
       name: package_info_plus
-      sha256: "88bc797f44a94814f2213db1c9bd5badebafdfb8290ca9f78d4b9ee2a3db4d79"
+      sha256: "7e76fad405b3e4016cd39d08f455a4eb5199723cf594cd1b8916d47140d93017"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.1"
+    version: "4.2.0"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
@@ -1172,10 +1148,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_web
-      sha256: "7b15ffb9387ea3e237bb7a66b8a23d2147663d391cafc5c8f37b2e7b4bde5d21"
+      sha256: d2ca4132d3946fec2184261726b355836a82c33d7d5b67af32692aff18a4684e
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.2"
+    version: "2.4.2"
   shared_preferences_windows:
     dependency: transitive
     description:
@@ -1417,10 +1393,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_web
-      sha256: fff0932192afeedf63cdd50ecbb1bc825d31aed259f02bb8dba0f3b729a5e88b
+      sha256: "772638d3b34c779ede05ba3d38af34657a05ac55b06279ea6edd409e323dca8e"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.3"
+    version: "2.3.3"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -1545,10 +1521,10 @@ packages:
     dependency: transitive
     description:
       name: web
-      sha256: "4188706108906f002b3a293509234588823c8c979dc83304e229ff400c996b05"
+      sha256: "97da13628db363c635202ad97068d47c5b8aa555808e7a9411963c533b449b27"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.2"
+    version: "0.5.1"
   webview_flutter:
     dependency: transitive
     description:

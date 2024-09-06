@@ -1,5 +1,4 @@
 import 'package:crm_mrs_app/constant.dart';
-import 'package:crm_mrs_app/view/screens/estimate/estimate_details.dart';
 import 'package:crm_mrs_app/view/screens/estimate/search_estimate.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

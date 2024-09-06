@@ -7,7 +7,7 @@ import 'package:crm_mrs_app/view/screens/dashboard/bottomNavBar.dart';
 import 'package:crm_mrs_app/view/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:upgrader/upgrader.dart';
 
 class Splash extends StatefulWidget {
