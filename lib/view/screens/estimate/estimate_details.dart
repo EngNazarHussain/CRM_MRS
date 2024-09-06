@@ -442,14 +442,17 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
               ),
               SizedBox(height: 16),
               Text(
-                'No deposit was set for this estimate',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+                content,
+                style: TextStyle(
+                    fontSize: 16,
+                    color: btnTextColor.withOpacity(.7),
+                    fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 8),
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  'Set estimate deposit',
+                  btnText,
                   style: TextStyle(color: Colors.blue),
                 ),
               ),
@@ -528,10 +531,30 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
                                 style: TextStyle(
                                     fontSize: 16, color: btnTextColor),
                               )
-                            : Container(
-                                width: double.infinity,
-                                height: 40,
-                                color: Colors.grey,
+                            : Column(
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    height: 5,
+                                    color: Colors.grey.shade300,
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 5,
+                                    color: Colors.grey.shade300,
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 5,
+                                    color: Colors.grey.shade300,
+                                  ),
+                                ],
                               ),
                         GestureDetector(
                           onTap: _addDescription, // Add description on tap
@@ -603,18 +626,18 @@ class _EstimateDetailsScreenState extends State<EstimateDetailsScreen> {
               ),
             ),
             SizedBox(height: 16),
-            // Example Sections
-            buildSection("Items", "Item details here...", 'Add +',
+            //  Sections
+            buildSection("Items", "No item added", '+ Add item',
                 'assets/images/ic_search.png'),
-            buildSection("Deposit", "Deposit details here...", 'Add +',
+            buildSection("Deposit", "No deposit was set for this estimate",
+                'Set estimate deposit', 'assets/images/ic_search.png'),
+            buildSection("Payments", "No payments added.", '+ Add payment',
                 'assets/images/ic_search.png'),
-            buildSection("Payments", "Payment details here...", 'Add +',
-                'assets/images/ic_search.png'),
-            buildSection("Signatures", "Signature details here...", 'Add +',
+            buildSection("Signatures", "No signature added", '+ Add signature',
                 'assets/images/ic_search.png'),
             buildSection("Attachments", "Attachment details here...", 'Add +',
                 'assets/images/ic_search.png'),
-            buildSection("Notes (empty)", "Note details here...", 'Add +',
+            buildSection("Notes (empty)", "No notes added", '🖊 Add note',
                 'assets/images/ic_search.png'),
           ],
         ),

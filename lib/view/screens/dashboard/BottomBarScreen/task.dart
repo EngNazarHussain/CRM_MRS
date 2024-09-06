@@ -41,7 +41,7 @@ class _NewsState extends State<News> {
           child: Container(
             margin: EdgeInsets.all(marginLR + marginLR),
             child: Column(
-              children: [Text('task')],
+              children: [Text('Message')],
             ),
           )),
     );

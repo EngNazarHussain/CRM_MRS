@@ -1,5 +1,8 @@
 import 'package:crm_mrs_app/constant.dart';
+import 'package:crm_mrs_app/view/screens/estimate/estimate_details.dart';
+import 'package:crm_mrs_app/view/screens/estimate/search_estimate.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ClientDetailScreen extends StatelessWidget {
   final Map<String, String> client;
@@ -163,8 +166,7 @@ class ClientDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              
-              
+
               SizedBox(height: 18),
 
               // Main Address Section
@@ -173,14 +175,13 @@ class ClientDetailScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       horizontal: marginLR + marginLR, vertical: marginLR),
                   child: Expanded(
-                   
                     child: Column(
-                      crossAxisAlignment : CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _buildSectionTitle('Main address'),
                         _buildAddressInfo(
                             '5043 glenmeadow dr, houston, Texas 77096'),
-  Divider(), // Line separator
+                        Divider(), // Line separator
 
                         // Billing Address Section
                         SizedBox(height: 16),
@@ -193,17 +194,16 @@ class ClientDetailScreen extends StatelessWidget {
 
                         // Jobs, Invoices, Estimates, Client Notes
                         _buildListTile('Jobs', '0'),
-                          Divider(), // Line separator
+                        Divider(), // Line separator
 
                         _buildListTile('Invoices', '0'),
-                          Divider(), // Line separator
+                        Divider(), // Line separator
 
                         _buildListTile('Estimates', '1'),
-                          Divider(), // Line separator
+                        Divider(), // Line separator
 
                         _buildListTile('Client notes', '0'),
-                          Divider(), // Line separator
-
+                        Divider(), // Line separator
                       ],
                     ),
                   )),
@@ -232,10 +232,15 @@ class ClientDetailScreen extends StatelessWidget {
         Expanded(
           child: Text(
             address,
-            style: TextStyle(fontSize: exSmFontSize-2, color: btnTextLightColor),
+            style:
+                TextStyle(fontSize: exSmFontSize - 2, color: btnTextLightColor),
           ),
         ),
-         Icon(Icons.arrow_forward_ios, color: Colors.grey, size: dfIconSize-5,),
+        Icon(
+          Icons.arrow_forward_ios,
+          color: Colors.grey,
+          size: dfIconSize - 5,
+        ),
       ],
     );
   }
@@ -245,14 +250,50 @@ class ClientDetailScreen extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: _getIconForTitle(title),
-      title: Text(title+' ($count)'),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-         // Text('($count)'),
-            Icon(Icons.arrow_forward_ios, color: Colors.grey, size: dfIconSize-5,),
-         // Icon(Icons.chevron_right),
-        ],
+      title: InkWell(
+          child: InkWell(
+              onTap: () {
+                print('clicked');
+                title == 'Estimates'
+                    ? Get.to(() => SearchEstimate())
+                    : null; // Handle the alternative case if needed
+              },
+              child: Text(title + ' ($count)'))),
+      trailing: InkWell(
+        onTap: () {
+          print('clicked');
+          title == 'Estimates'
+              ? Get.to(() => SearchEstimate())
+              : null; // Handle the alternative case if needed
+        },
+        child: InkWell(
+          onTap: () {
+            print('clicked');
+            title == 'Estimates'
+                ? Get.to(() => SearchEstimate())
+                : null; // Handle the alternative case if needed
+          },
+          child: InkWell(
+            onTap: () {
+              print('clicked');
+              title == 'Estimates'
+                  ? Get.to(() => SearchEstimate())
+                  : null; // Handle the alternative case if needed
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Text('($count)'),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.grey,
+                  size: dfIconSize - 5,
+                ),
+                // Icon(Icons.chevron_right),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -261,7 +302,10 @@ class ClientDetailScreen extends StatelessWidget {
   Icon _getIconForTitle(String title) {
     switch (title) {
       case 'Jobs':
-        return Icon(Icons.work, color: Colors.grey,);
+        return Icon(
+          Icons.work,
+          color: Colors.grey,
+        );
       case 'Invoices':
         return Icon(Icons.receipt, color: Colors.grey);
       case 'Estimates':

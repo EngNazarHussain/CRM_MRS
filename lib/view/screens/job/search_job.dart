@@ -1,11 +1,11 @@
 import 'package:crm_mrs_app/constant.dart';
-import 'package:crm_mrs_app/view/screens/clients/client_detail_screen.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/clients/client_detail_screen.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/bottomNavBar.dart';
 import 'package:crm_mrs_app/view/screens/job/new_job.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'dart:ui'; // Import this for TextDirection
+// Import this for TextDirection
 
 class SearchJobs extends StatefulWidget {
   @override
@@ -270,6 +270,7 @@ class _SearchJobsState extends State<SearchJobs> {
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             color: appcolor,
+            size: dfIconSize - 2,
           ),
           onPressed: () {
             Get.to(() => BottomNavBar());
@@ -279,15 +280,18 @@ class _SearchJobsState extends State<SearchJobs> {
         title: Text(
           'Jobs',
           style: TextStyle(
-              color: appcolor,
-              fontSize: smFontSize,
-              fontWeight: FontWeight.w600),
+            color: appcolor,
+            fontSize: smFontSize - 1,
+            fontWeight: FontWeight.w600,
+          ),
         ),
+
         actions: [
           IconButton(
             icon: Icon(
               Icons.add,
               color: appcolor,
+              size: dfIconSize - 2,
             ),
             onPressed: () {
               Get.to(() => NewJobPage());
@@ -307,7 +311,9 @@ class _SearchJobsState extends State<SearchJobs> {
         ],
         backgroundColor: applightcolor,
         bottom: _isFilterOpen
-            ? PreferredSize(
+            ? 
+            
+            PreferredSize(
                 preferredSize: Size.fromHeight(50.0),
                 child: Column(
                   children: [
@@ -399,6 +405,8 @@ class _SearchJobsState extends State<SearchJobs> {
                   ],
                 ),
               )
+           
+           
             : null,
       ),
       body: Padding(

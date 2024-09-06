@@ -27,13 +27,14 @@ class _TimeSheetsScreenState extends State<TimeSheetsScreen> {
           style: TextStyle(
               color: appcolor,
               fontWeight: FontWeight.w600,
-              fontSize: smFontSize),
+              fontSize: smFontSize - 1),
         ),
         titleSpacing: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new,
             color: appcolor,
+            size: dfIconSize - 2,
           ),
           onPressed: () {
             // Add your back navigation here
@@ -74,6 +75,29 @@ class _TimeSheetsScreenState extends State<TimeSheetsScreen> {
                         fontSize: dfFontSize,
                         color: Colors.black54,
                         fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            width: 350,
+            child: Container(
+              padding: EdgeInsets.all(marginSet + 3),
+              decoration: BoxDecoration(
+                  color: appcolor,
+                  borderRadius: BorderRadius.circular(roundBtn)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.timer_sharp),
+                  Text(
+                    'Clock in',
+                    style: TextStyle(
+                        color: btnTextColor, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

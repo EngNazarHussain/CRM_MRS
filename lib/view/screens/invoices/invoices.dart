@@ -1,5 +1,5 @@
 import 'package:crm_mrs_app/constant.dart';
-import 'package:crm_mrs_app/view/screens/clients/client_detail_screen.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/clients/client_detail_screen.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/bottomNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,6 +47,7 @@ class _SearchInvoicesState extends State<SearchInvoices> {
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             color: appcolor,
+            size: dfIconSize - 2,
           ),
           onPressed: () {
             print('clicked');
@@ -58,7 +59,7 @@ class _SearchInvoicesState extends State<SearchInvoices> {
         titleSpacing: 0, // Closer title to the leading icon
         title: Text(
           'Invoices',
-          style: TextStyle(color: appcolor),
+          style: TextStyle(color: appcolor, fontSize: smFontSize - 1),
         ),
         actions: [
           IconButton(

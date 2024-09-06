@@ -1,5 +1,5 @@
 import 'package:crm_mrs_app/constant.dart';
-import 'package:crm_mrs_app/view/screens/clients/client_detail_screen.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/clients/client_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class SearchClients extends StatefulWidget {

@@ -100,6 +100,83 @@ class _DashboardState extends State<Dashboard> {
     super.dispose();
   }
 
+  void _showBottomSheet(BuildContext context, String clientName) {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.only(top: 10.0), // Add padding to the top
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Grey line at the top
+              Container(
+                width: 40.0,
+                height: 4.0,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
+              // Adding spacing below the line
+              SizedBox(height: 8.0),
+              Text(
+                clientName,
+                style: TextStyle(
+                    color: btnTextColor,
+                    fontWeight: FontWeight.w800,
+                    fontSize: smFontSize),
+              ),
+              SizedBox(height: 8.0),
+              // List of actions
+
+              ListTile(
+                leading: Icon(Icons.work_outline),
+                title: Text(
+                  'Job',
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add message functionality here
+                  Get.to(
+                    () => NewJobPage(),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.receipt_outlined),
+                title: Text('Receipt'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add message functionality here
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.request_page_outlined),
+                title: Text('Estimate'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add schedule functionality here
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.people_outline),
+                title: Text('Client'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add create invoice functionality here
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double scWidth = MediaQuery.of(context).size.width;
@@ -181,9 +258,7 @@ class _DashboardState extends State<Dashboard> {
                   borderRadius: BorderRadius.circular(100),
                 ),
                 onPressed: () {
-                  Get.to(
-                    () => NewJobPage(),
-                  );
+                  _showBottomSheet(context, 'Create');
                 },
                 child: Icon(
                   Icons.add,

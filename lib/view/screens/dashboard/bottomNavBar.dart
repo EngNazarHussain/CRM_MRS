@@ -1,9 +1,10 @@
-import 'package:crm_mrs_app/view/screens/clients/clients_list.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/calls/calls_list.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/clients/clients_list.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/complaint.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/dashboard.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/task.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/drawer/custom_drawer.dart';
-import 'package:crm_mrs_app/view/screens/schedule/schedule.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/schedule/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -48,9 +49,9 @@ class _BottomNavBarState extends State<BottomNavBar>
     super.initState();
     _widgetOptions = [
       Dashboard(),
-     ScheduleScreen (),
+      ScheduleScreen(),
       News(),
-      Complaint(),
+      CallListScreen(),
       ClientsListScreen(),
     ];
   }

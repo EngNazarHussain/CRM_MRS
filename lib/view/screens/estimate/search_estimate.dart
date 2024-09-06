@@ -83,6 +83,7 @@ class _SearchEstimateState extends State<SearchEstimate> {
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             color: appcolor,
+            size: dfIconSize - 2,
           ),
           onPressed: () {
             print('clicked');
@@ -93,10 +94,10 @@ class _SearchEstimateState extends State<SearchEstimate> {
         ),
         titleSpacing: 0, // Closer title to the leading icon
         title: Text(
-          'Estimate',
+          'Estimates',
           style: TextStyle(
               color: appcolor,
-              fontSize: smFontSize,
+              fontSize: smFontSize - 1,
               fontWeight: FontWeight.w600),
         ),
         actions: [

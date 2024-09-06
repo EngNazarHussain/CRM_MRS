@@ -63,6 +63,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
+      titleSpacing: 0,
       leading: Column(
         children: [
           IconButton(
