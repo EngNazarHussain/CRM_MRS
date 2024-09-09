@@ -38,23 +38,43 @@ class ApiClient extends GetxService {
       return Response(statusCode: 1, statusText: generalMessage);
     }
   }
-
-  Future<Response> postData(
-    String uri,
-    dynamic body,
-  ) async {
-    try {
-      debugPrint('====> API Call: ${appBaseUrl + uri}');
-      debugPrint('====> API Body: $body');
-      Http.Response _response = await Http.post(
-        Uri.parse(appBaseUrl + uri),
-        body: body,
-      ).timeout(Duration(seconds: timeoutInSeconds));
-      return handleResponse(_response, uri);
-    } catch (e) {
-      return Response(statusCode: 1, statusText: generalMessage);
-    }
+  Future<Response> postLoginData(
+  String uri,
+  dynamic body,
+) async {
+  try {
+    debugPrint('====> API Call: ${appBaseUrl + uri}');
+    debugPrint('====> API Body: $body');
+    Http.Response _response = await Http.post(
+      Uri.parse(appBaseUrl + uri),
+      body: body,
+      headers: {
+        'Accept': 'application/json', // Add this header
+      },
+    ).timeout(Duration(seconds: timeoutInSeconds));
+    return handleResponse(_response, uri);
+  } catch (e) {
+    return Response(statusCode: 1, statusText: generalMessage);
   }
+}
+
+
+  // Future<Response> postData(
+  //   String uri,
+  //   dynamic body,
+  // ) async {
+  //   try {
+  //     debugPrint('====> API Call: ${appBaseUrl + uri}');
+  //     debugPrint('====> API Body: $body');
+  //     Http.Response _response = await Http.post(
+  //       Uri.parse(appBaseUrl + uri),
+  //       body: body,
+  //     ).timeout(Duration(seconds: timeoutInSeconds));
+  //     return handleResponse(_response, uri);
+  //   } catch (e) {
+  //     return Response(statusCode: 1, statusText: generalMessage);
+  //   }
+  // }
 
   Future<Response> puttData(
     String uri,

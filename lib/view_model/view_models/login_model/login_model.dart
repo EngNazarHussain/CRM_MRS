@@ -1,188 +1,111 @@
-// class LogInModel {
-//   final int status;
-//   final String message;
-//   final String accessToken;
-//   final String tokenExpiryTime;
-//   final int userAreaTypeId;
-//   final String username;
-//   final String email;
-//   final List<String> permissions;
-
-//   LogInModel({
-//     required this.status,
-//     required this.message,
-//     required this.accessToken,
-//     required this.tokenExpiryTime,
-//     required this.userAreaTypeId,
-//     required this.username,
-//     required this.email,
-//     required this.permissions,
-//   });
-
-//   factory LogInModel.fromJson(Map<String, dynamic> json) {
-//     List<dynamic> permissionsList = json['permissions'] ?? [];
-
-//     List<String> permissions =
-//         permissionsList.map((permission) => permission.toString()).toList();
-
-//     return LogInModel(
-//       status: json['status'] ?? 0,
-//       message: json['message'] ?? "",
-//       accessToken: json['access_token'] ?? "",
-//       tokenExpiryTime: json['token_expiry_time'] ?? "",
-//       userAreaTypeId: json['user_area_type_id'] ?? 0,
-//       username: json['username'] ?? "",
-//       email: json['email'] ?? "",
-//       permissions: permissions,
-//     );
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'status': status,
-//       'message': message,
-//       'access_token': accessToken,
-//       'token_expiry_time': tokenExpiryTime,
-//       'user_area_type_id': userAreaTypeId,
-//       'username': username,
-//       'email': email,
-//       'permissions': permissions, // Keep as a list
-//     };
-//   }
-// }
-
-// // class LogInModel {
-// //   final int status;
-// //   final String message;
-// //   final String accessToken;
-// //   final int userAreaTypeId;
-// //   final String username;
-// //   final String email;
-// //   final List<String> permissions;
-
-// //   LogInModel({
-// //     required this.status,
-// //     required this.message,
-// //     required this.accessToken,
-// //     required this.userAreaTypeId,
-// //     required this.username,
-// //     required this.email,
-// //     required this.permissions,
-// //   });
-
-// //   factory LogInModel.fromJson(Map<String, dynamic> json) {
-// //     List<dynamic> permissionsList = [];
-
-// //     if (json['permissions'] != null) {
-// //       permissionsList = json['permissions'];
-// //     } else {
-// //       permissionsList = [];
-// //     }
-
-// //     List<String> permissions =
-// //         permissionsList.map((permission) => permission.toString()).toList();
-
-// //     return LogInModel(
-// //       status: json['status'] ?? 0,
-// //       message: json['message'] ?? "",
-// //       accessToken: json['access_token'] ?? "",
-// //       userAreaTypeId: json['user_area_type_id'] ?? 0,
-// //       username: json['username'] ?? "",
-// //       email: json['email'] ?? "",
-// //       permissions: permissions,
-// //     );
-// //   }
-
-// //   Map<String, dynamic> toJson() {
-// //     return {
-// //       'status': status,
-// //       'message': message,
-// //       'accessToken': accessToken,
-// //       'userAreaTypeId': userAreaTypeId,
-// //       'username': username,
-// //       'email': email,
-// //       'permissions':
-// //           permissions.join(','), // Convert list to comma-separated string
-// //     };
-// //   }
-// // }
-
 class LogInModel {
-  final int success;
   final String message;
-  final DataArray dataArray;
+  final User user;
+  final String token;
 
   LogInModel({
-    required this.success,
     required this.message,
-    required this.dataArray,
+    required this.user,
+    required this.token,
   });
 
   factory LogInModel.fromJson(Map<String, dynamic> json) {
     return LogInModel(
-      success: json['success'],
       message: json['message'],
-      dataArray: DataArray.fromJson(json['data_array']),
+      user: User.fromJson(json['user']),
+      token: json['token'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'success': success,
       'message': message,
-      'data_array': dataArray.toJson(),
+      'user': user.toJson(),
+      'token': token,
     };
   }
 }
 
-class DataArray {
-  final String token;
-  final String shortToken;
-  final String name;
-  final String nameStr;
-  final String designation;
-  final String uid;
-  final String photo;
-  final String username;
-  final int usertype;
+class User {
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String? phone;
+  final String userType;
+  final String? avatar;
+  final String status;
+  final int callMasking;
+  final String? color;
+  final String? techOption;
+  final String? location;
+  final String? skills;
+  final String? note;
+  final String? address;
+  final String? city;
+  final String? state;
+  final String? zipCode;
 
-  DataArray({
-    required this.token,
-    required this.shortToken,
-    required this.name,
-    required this.nameStr,
-    required this.designation,
-    required this.uid,
-    required this.photo,
-    required this.username,
-    required this.usertype,
+  User({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    this.phone,
+    required this.userType,
+    this.avatar,
+    required this.status,
+    required this.callMasking,
+    this.color,
+    this.techOption,
+    this.location,
+    this.skills,
+    this.note,
+    this.address,
+    this.city,
+    this.state,
+    this.zipCode,
   });
 
-  factory DataArray.fromJson(Map<String, dynamic> json) {
-    return DataArray(
-      token: json['token'] ?? '',
-      shortToken: json['short_token'] ?? '',
-      name: json['name'] ?? '',
-      nameStr: json['name_str'] ?? '',
-      designation: json['designation'] ?? '',
-      uid: json['uid'] ?? '',
-      photo: json['photo'] ?? '',
-      username: json['username'] ?? '',
-      usertype: json['usertype'] ?? 0,
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      email: json['email'] ?? '',
+      phone: json['phone'],
+      userType: json['user_type'] ?? '',
+      avatar: json['avatar'],
+      status: json['status'] ?? '',
+      callMasking: json['call_masking'] ?? 0,
+      color: json['color'],
+      techOption: json['tech_option'],
+      location: json['location'],
+      skills: json['skills'],
+      note: json['note'],
+      address: json['address'],
+      city: json['city'],
+      state: json['state'],
+      zipCode: json['zip_code'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'token': token,
-      'short_token': shortToken,
-      'name': name,
-      'name_str': nameStr,
-      'designation': designation,
-      'uid': uid,
-      'photo': photo,
-      'username': username,
-      'usertype': usertype,
+      'first_name': firstName,
+      'last_name': lastName,
+      'email': email,
+      'phone': phone,
+      'user_type': userType,
+      'avatar': avatar,
+      'status': status,
+      'call_masking': callMasking,
+      'color': color,
+      'tech_option': techOption,
+      'location': location,
+      'skills': skills,
+      'note': note,
+      'address': address,
+      'city': city,
+      'state': state,
+      'zip_code': zipCode,
     };
   }
 }

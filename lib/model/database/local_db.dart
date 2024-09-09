@@ -89,7 +89,7 @@ class DBManager {
     box.write(LocalDBStrings.login_user, jsonEncode(response.body));
   }
 
-  // Get login data from database
+  // Get login data from the database (fetch user email)
   Future<String> fetchLoginUserEmail() async {
     var user = box.read(LocalDBStrings.login_user);
     String userEmail = "";
@@ -97,7 +97,7 @@ class DBManager {
       try {
         var decodedUser = jsonDecode(user);
         var _user = LogInModel.fromJson(decodedUser);
-        userEmail = _user.dataArray.nameStr.toString();
+        userEmail = _user.user.email ?? ""; // Fetch email from user data
       } catch (e) {
         debugPrint("catch:$e");
       }
@@ -107,6 +107,7 @@ class DBManager {
     return userEmail;
   }
 
+  // Get login data from the database (fetch user token)
   Future<String> fetchLoginUserToken() async {
     var user = box.read(LocalDBStrings.login_user);
     String userToken = "";
@@ -114,7 +115,7 @@ class DBManager {
       try {
         var decodedUser = jsonDecode(user);
         var _user = LogInModel.fromJson(decodedUser);
-        userToken = _user.dataArray.token.toString();
+        userToken = _user.token; // Fetch token directly
       } catch (e) {
         debugPrint("catch:$e");
       }
@@ -124,6 +125,7 @@ class DBManager {
     return userToken;
   }
 
+  // Get full login user data
   Future<LogInModel> fetchLoginUser() async {
     var user = box.read(LocalDBStrings.login_user);
     LogInModel? loginUser;

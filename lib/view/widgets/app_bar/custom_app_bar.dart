@@ -2,13 +2,15 @@ import 'package:crm_mrs_app/constant.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String? title;
+  final String? userName;
+   final String? userType;
   final Widget? leading;
   final List<Widget>? actions;
   final GlobalKey<ScaffoldState> scaffoldKey; // Add this line
 
   CustomAppBar({
-    this.title,
+    this.userName,
+    this.userType,
     this.leading,
     this.actions,
     required this.scaffoldKey, // Add this line
@@ -19,15 +21,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       backgroundColor: applightcolor,
-      title: Text(
-        textAlign: TextAlign.left,
-        title ?? '',
-        style: TextStyle(
-          color: dfColor,
-          fontWeight: FontWeight.w700,
-          fontSize: lgFontSize,
-        ),
-      ),
+      // title: Text(
+      //   textAlign: TextAlign.left,
+      //   userName ?? '',
+      //   style: TextStyle(
+      //     color: dfColor,
+      //     fontWeight: FontWeight.w700,
+      //     fontSize: lgFontSize,
+      //   ),
+      // ),
       flexibleSpace: Padding(
         padding: EdgeInsets.symmetric(vertical: 0, horizontal: 46),
         child: Container(
@@ -37,7 +39,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'MRS Garage Door',
+        userName ?? 
+                'User Name',
                 style: TextStyle(
                   color: Colors.yellow[700],
                   fontWeight: FontWeight.bold,
@@ -51,7 +54,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       color: Colors.white, fontSize: exXSmFontSize + 1),
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Usman',
+                      text: userType?? 'User Type',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(text: ', here is your upcoming day'),

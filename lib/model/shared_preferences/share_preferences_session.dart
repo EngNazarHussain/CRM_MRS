@@ -3,20 +3,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 void saveSessionData(Map<String, dynamic> jsonData) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setBool('isLoggedIn', true);
-  prefs.setInt('status', jsonData['status']);
   prefs.setString('message', jsonData['message'] ?? 'N/A');
   prefs.setString('token', jsonData['token'] ?? 'N/A');
-  prefs.setString('short_token', jsonData['short_token'] ?? 'N/A');
-  prefs.setString('name', jsonData['name'] ?? 'N/A');
-  prefs.setString('name_str', jsonData['name_str'] ?? 'N/A');
-  prefs.setString('designation', jsonData['designation'] ?? 'N/A');
-  prefs.setString('uid', jsonData['uid'] ?? 'N/A');
-  prefs.setString('photo', jsonData['photo'] ?? 'N/A');
-  prefs.setString('username', jsonData['username'] ?? 'N/A');
-  prefs.setInt('usertype', jsonData['usertype']);
+  prefs.setString('first_name', jsonData['first_name'] ?? 'N/A');
+  prefs.setString('last_name', jsonData['last_name'] ?? 'N/A');
+  prefs.setString('email', jsonData['email'] ?? 'N/A');
+  prefs.setString('phone', jsonData['phone'] ?? 'N/A');
+  prefs.setString('user_type', jsonData['user_type'] ?? 'N/A');
+  prefs.setString('avatar', jsonData['avatar'] ?? 'N/A');
+  prefs.setInt('call_masking', jsonData['call_masking'] ?? 0);
   prefs.setInt('login_time', jsonData['login_time'] ?? 0);
 }
-
 
 
 Future<void> logout() async {

@@ -3,6 +3,7 @@ import 'package:crm_mrs_app/model/resources/values_manager.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/bottomNavBar.dart';
 import 'package:crm_mrs_app/view/widgets/dialogs/custom_dialog.dart';
 import 'package:crm_mrs_app/view/widgets/dialogs/custom_snackbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _LogInState extends State<LogIn> {
   void _login(
       AuthController authController, _email, _password, _device_token) async {
     if (_email.isEmpty) {
-      showCustomSnackBar('Enter User Name'.tr);
+      showCustomSnackBar('Enter Email'.tr);
       _isLoading = false;
     }
     // else if (!GetUtils.isEmail(_email)) {
@@ -182,7 +183,7 @@ class _LogInState extends State<LogIn> {
                                       prefixIconColor: blackColor,
                                       suffixIconColor: blackColor,
                                       labelStyle: TextStyle(color: blackColor),
-                                      hintText: 'Your Business Email',
+                                      hintText: 'Your Email',
                                       // prefixIcon: Icon(
                                       //   Icons.email_outlined,
                                       //   size: dfIconSize,
@@ -313,21 +314,22 @@ class _LogInState extends State<LogIn> {
                                               print(
                                                   'Email: $_email, Password: $_password');
                                               _isLoading = true;
-                                              _isLoading = false;
-                                              Get.offAll(
-                                                () => BottomNavBar(),
-                                                arguments: 'login',
-                                              );
 
-                                              // if (defaultTargetPlatform ==
-                                              //     TargetPlatform.android) {
-                                              //   _login(_, _email, _password,
-                                              //       'Android');
-                                              // } else if (defaultTargetPlatform ==
-                                              //     TargetPlatform.iOS) {
-                                              //   _login(_, _email, _password,
-                                              //       'IOS');
-                                              // }
+                                              // _isLoading = false;
+                                              // Get.offAll(
+                                              //   () => BottomNavBar(),
+                                              //   arguments: 'login',
+                                              // );
+
+                                              if (defaultTargetPlatform ==
+                                                  TargetPlatform.android) {
+                                                _login(_, _email, _password,
+                                                    'application/json');
+                                              } else if (defaultTargetPlatform ==
+                                                  TargetPlatform.iOS) {
+                                                _login(_, _email, _password,
+                                                    'application/json');
+                                              }
                                             }
                                           },
                                           child: Text(

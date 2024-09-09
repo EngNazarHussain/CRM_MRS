@@ -1,5 +1,7 @@
 // Import the libraries with a prefix
 // Hide CarouselController from one of the imports
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/drawer/custom_drawer.dart';
 import 'package:crm_mrs_app/view/screens/job/new_job.dart';
 import 'package:crm_mrs_app/view/widgets/app_bar/custom_app_bar.dart';
@@ -10,6 +12,7 @@ import 'package:crm_mrs_app/model/repository/auth_repo.dart';
 import 'package:get/get.dart';
 
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constant.dart';
 
@@ -88,17 +91,82 @@ class _DashboardState extends State<Dashboard> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>(); // Create GlobalKey
+      bool errorLod = false;
+      String userName  = '';
+        String userStatus = '';
+          String userTypeDisplay = '';
+            String userEmail  = '';
+             String authToken  = '';
 
   @override
   void initState() {
     super.initState();
-    isLoading = false;
+    loadSessionData();
+  
   }
 
   @override
   void dispose() {
     super.dispose();
   }
+    Future<void> checkConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        errorLod = true;
+      });
+    } else {
+      setState(() {
+        errorLod = false;
+      });
+    }
+  }
+
+Future<void> loadSessionData() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  // Fetch the specific fields based on new API response
+  final String? firstName = prefs.getString('first_name');
+  final String? lastName = prefs.getString('last_name');
+  final String? status = prefs.getString('status');
+  final String? token = prefs.getString('token');
+  final String? userType = prefs.getString('user_type');
+
+  // Check if firstName and lastName exist before proceeding
+  if (firstName != null && lastName != null) {
+    setState(() {
+      userName = '$firstName $lastName';  // Combine first and last name
+      userStatus = status ?? 'Unknown';   // Status handling with a fallback value
+      authToken = token ?? 'N/A';         // Token handling
+      userTypeDisplay = userType ?? 'Unknown';  // User type handling
+    });
+      isLoading = false;
+
+    // Additional actions like connectivity check can follow here
+    checkConnectivity();
+
+    await Future.delayed(Duration(seconds: 1));
+
+    if (errorLod == true) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.info,
+        animType: AnimType.bottomSlide,
+        title: 'No Internet Connection!',
+        desc: 'No active internet connection was found! \n The app will not run in offline mode, for the best experience, please connect to the internet!',
+        btnCancel: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.check),
+          color: Colors.green,
+        ),
+      ).show();
+    }
+  }
+}
+
 
   void _showBottomSheet(BuildContext context, String clientName) {
     showModalBottomSheet(
@@ -191,6 +259,8 @@ class _DashboardState extends State<Dashboard> {
             key: _scaffoldKey, // Assign key to Scaffold
 
             appBar: CustomAppBar(
+              userName: userName,
+              userType: userTypeDisplay,
               scaffoldKey: _scaffoldKey,
             ),
             drawer: CustomDrawer(), // Your custom drawer widget

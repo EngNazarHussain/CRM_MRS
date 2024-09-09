@@ -18,121 +18,71 @@ class AuthController extends GetxController implements GetxService {
     super.onInit();
     // initDB();
   }
+Future<ResponseModel> login(String username, String password, String acceptSource) async {
+  isLoading = true;
+  update();
 
-  Future<ResponseModel> login(
-      String username, String password, String source) async {
-    isLoading = true;
-    update();
-    // Save login time
-    final loginTimestamp = DateTime.now().millisecondsSinceEpoch;
-    final loginDateTime = DateTime.fromMillisecondsSinceEpoch(loginTimestamp);
-    final response = await authRepo.login(username, password, source);
-    ResponseModel responseModel;
+  // Save login time
+  final loginTimestamp = DateTime.now().millisecondsSinceEpoch;
+  final response = await authRepo.login(username, password, acceptSource);
+  ResponseModel responseModel;
 
-    if (response.statusCode == 200) {
-      print("Response LogIn :" + response.body.toString());
+  if (response.statusCode == 200) {
+    print("Response LogIn: ${response.body.toString()}");
 
-      // Since response.body is already a map, no need to decode it again
-      final jsonResponse = LogInModel.fromJson(response.body);
-      final status = jsonResponse.success;
+    // Parse the response body using the updated LogInModel
+    final jsonResponse = LogInModel.fromJson(response.body);
 
-      if (status == 1) {
-        final longToken = jsonResponse.dataArray.token;
-        print(longToken);
+    // Check if the login was successful based on message (you can modify the condition based on your logic)
+    if (jsonResponse.message.toLowerCase() == "login successful") {
+      final token = jsonResponse.token;
+      print("Token: $token");
 
-        await DBManager().saveUserData(response);
-        String userEmail = await DBManager().fetchLoginUserEmail();
+      // Save the user data (if needed)
+      await DBManager().saveUserData(response);
+      String userEmail = await DBManager().fetchLoginUserEmail();
 
-        final sessionData = {
-          'status': jsonResponse.success,
-          'message': jsonResponse.message,
-          'token': jsonResponse.dataArray.token,
-          'short_token': jsonResponse.dataArray.shortToken,
-          'name': jsonResponse.dataArray.name,
-          'name_str': jsonResponse.dataArray.nameStr,
-          'designation': jsonResponse.dataArray.designation,
-          'uid': jsonResponse.dataArray.uid,
-          'photo': jsonResponse.dataArray.photo,
-          'username': jsonResponse.dataArray.username,
-          'usertype': jsonResponse.dataArray.usertype,
-          'login_time': loginTimestamp,
-        };
+      // Prepare the session data to store in SharedPreferences
+      final sessionData = {
+        'status': jsonResponse.user.status, // User status (e.g., active)
+        'message': jsonResponse.message, // Message from the response
+        'token': jsonResponse.token, // Token from the response
+        'first_name': jsonResponse.user.firstName, // User's first name
+        'last_name': jsonResponse.user.lastName, // User's last name
+        'email': jsonResponse.user.email, // User's email
+        'phone': jsonResponse.user.phone, // User's phone (can be null)
+        'user_type': jsonResponse.user.userType, // User type (admin)
+        'avatar': jsonResponse.user.avatar, // User's avatar (can be null)
+        'call_masking': jsonResponse.user.callMasking, // Call masking option
+        'login_time': loginTimestamp, // Login timestamp
+      };
 
-        saveSessionData(sessionData);
-        funToast(jsonResponse.message, Colors.green);
+      // Save session data to SharedPreferences
+      saveSessionData(sessionData);
 
-        print("Login time $loginTimestamp");
-        print("session data saved!");
-        print("Hello $userEmail");
-        responseModel = ResponseModel(true, jsonResponse.message);
-      } else {
-        // funToast(jsonResponse.message, Colors.red);
-        responseModel = ResponseModel(false, jsonResponse.message);
-      }
+      funToast(jsonResponse.message, Colors.green);
+
+      print("Login time: $loginTimestamp");
+      print("Session data saved!");
+      print("Hello $userEmail");
+
+      // Return successful response model
+      responseModel = ResponseModel(true, jsonResponse.message);
     } else {
-      print('Unexpected response status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
-
-      responseModel = ResponseModel(false, response.statusText.toString());
+      // Handle failure case (e.g., wrong credentials)
+      responseModel = ResponseModel(false, jsonResponse.message);
     }
-    isLoading = false;
-    update();
-    return responseModel;
+  } else {
+    // Handle unexpected response status
+    print('Unexpected response status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    responseModel = ResponseModel(false, response.statusText ?? 'Error');
   }
 
-  // Future<ResponseModel> login(String username, String password) async {
-  //   isLoading = true;
-  //   update();
-  //   // Save login time
-  //   final loginTimestamp = DateTime.now().millisecondsSinceEpoch;
-  //   final loginDateTime = DateTime.fromMillisecondsSinceEpoch(loginTimestamp);
-  //   final response = await authRepo.login(username, password);
-  //   ResponseModel responseModel;
+  isLoading = false;
+  update();
+  return responseModel;
+}
 
-  //   if (response.statusCode == 200) {
-  //     print("Response LogIn :" + response.body.toString());
 
-  //     // final Map<String, dynamic> responseData = json.decode(response.body);
-
-  //     final jsonResponse = LogInModel.fromJson(response.body);
-  //     final status = jsonResponse.status;
-  //     final longtoken = jsonResponse.accessToken;
-  //     print(longtoken);
-
-  //     if (status == 1) {
-  //       await DBManager().saveUserData(response);
-  //       String userEmail = await DBManager().fetchLoginUserEmail();
-
-  //       final sessionData = {
-  //         'status': jsonResponse.status,
-  //         'message': jsonResponse.message,
-  //         'access_token': jsonResponse.accessToken,
-  //         'token_expiry_time': jsonResponse.tokenExpiryTime,
-  //         'user_area_type_id': jsonResponse.userAreaTypeId,
-  //         'username': jsonResponse.username,
-  //         'email': jsonResponse.email,
-  //         'permissions': jsonResponse.permissions,
-  //         'login_time': loginTimestamp,
-  //       };
-
-  //       saveSessionData(sessionData);
-  //       funToast(jsonResponse.message, Colors.green);
-
-  //       print("Login time $loginTimestamp");
-  //       print("session data saved!");
-  //       print("Hello $userEmail");
-  //       responseModel = ResponseModel(true, response.body['message']);
-  //     } else {
-  //       responseModel = ResponseModel(false, response.body['message']);
-  //     }
-  //   } else {
-  //     print('Unexpected response status code: ${response.statusCode}');
-  //     print('Response body: ${response.body}');
-
-  //     responseModel = ResponseModel(false, response.statusText.toString());
-  //   }
-  //   isLoading = false;
-  //   update();
-  //   return responseModel;
-  // }
 }
