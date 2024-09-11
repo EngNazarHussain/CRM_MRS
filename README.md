@@ -1,5 +1,5 @@
 # crm_mrs_app
-# Developed By Nazar Hussain (Flutter + android developer and PM)in Redis Solution
+# Developed By Nazar Hussain (Flutter + android  + IOs developer and PM)in Redis Solution
 A new Flutter project.
-# DHAMRSApp
+# CRM_MRSApp
 # CRM_MRS
