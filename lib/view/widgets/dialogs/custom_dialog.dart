@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:crm_mrs_app/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+// import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 Future CustomDialog(BuildContext context) {
   return AwesomeDialog(
@@ -24,12 +24,12 @@ Future CustomDialog(BuildContext context) {
       Navigator.of(context).pop(); // This will close the dialog
     },
     btnOkOnPress: () {
-      FlutterPhoneDirectCaller.callNumber('1234');
+     // FlutterPhoneDirectCaller.callNumber('1234');
     }, // Replace with your phone number},
     btnOk: GestureDetector(
       onTap: () {
         // Navigator.of(context).pop(); // This will close the dialog
-        FlutterPhoneDirectCaller.callNumber('1234');
+        // FlutterPhoneDirectCaller.callNumber('1234');
       },
       child: CircleAvatar(
           radius: 20,
