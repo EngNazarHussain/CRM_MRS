@@ -1,8 +1,13 @@
 import 'package:crm_mrs_app/constant.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/drawer/custom_drawer.dart';
 import 'package:flutter/material.dart';
 // Add this dependency for date formatting
 
 class CallListScreen extends StatefulWidget {
+  String userTypeDisplay = '';
+  String userName = '';
+  CallListScreen(this.userTypeDisplay, this.userName);
+
   @override
   _CallListScreenState createState() => _CallListScreenState();
 }
@@ -26,8 +31,7 @@ class _CallListScreenState extends State<CallListScreen> {
           ),
           onPressed: () {
             print('clicked');
-            _scaffoldKey.currentState
-                ?.openDrawer(); // Use the key to open the drawer
+             drawer: CustomDrawer(widget.userTypeDisplay, widget.userName); // Your custom drawer widget
           },
         ),
         titleSpacing: 0, // Closer title to the leading icon

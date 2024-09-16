@@ -2,10 +2,15 @@ import 'package:crm_mrs_app/constant.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/clients/client_detail_screen.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/clients/new_client.dart';
 import 'package:crm_mrs_app/view/screens/dashboard/BottomBarScreen/clients/search_clients.dart';
+import 'package:crm_mrs_app/view/screens/dashboard/drawer/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ClientsListScreen extends StatefulWidget {
+  String userTypeDisplay=''; 
+  String userName ='';
+  ClientsListScreen(this.userTypeDisplay, this.userName);
+
   @override
   _ClientsListScreenState createState() => _ClientsListScreenState();
 }
@@ -134,8 +139,7 @@ class _ClientsListScreenState extends State<ClientsListScreen> {
           ),
           onPressed: () {
             print('clicked');
-            _scaffoldKey.currentState
-                ?.openDrawer(); // Use the key to open the drawer
+           drawer: CustomDrawer(widget.userTypeDisplay, widget.userName); // Your custom drawer widget
           },
         ),
         titleSpacing: 0, // Closer title to the leading icon

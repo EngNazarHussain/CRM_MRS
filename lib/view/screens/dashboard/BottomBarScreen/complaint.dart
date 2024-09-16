@@ -36,7 +36,7 @@ class _ComplaintState extends State<Complaint> {
       appBar: CustomAppBar(
         scaffoldKey: _scaffoldKey,
       ),
-      drawer: CustomDrawer(), // Your custom drawer widget
+     // drawer: CustomDrawer(), // Your custom drawer widget
       body: Container(
         margin: EdgeInsets.only(left: marginLR, right: marginLR, top: 25),
         child: Column(

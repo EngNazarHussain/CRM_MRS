@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomDrawer extends StatelessWidget {
+String userTypeDisplay = '';
+String user = '';
+  CustomDrawer(this. userTypeDisplay, this.user);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -42,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Usman',
+                              userTypeDisplay.toString(),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -50,7 +54,7 @@ class CustomDrawer extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'MRS Garage Door',
+                             user,
                               style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 14,

@@ -7,8 +7,9 @@ import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 class News extends StatefulWidget {
   bool isLoading = true;
-
-  News();
+String userTypeDisplay="";
+String userName = '';
+  News( this.userTypeDisplay, this.userName);
   @override
   State<News> createState() => _NewsState();
 }
@@ -33,7 +34,7 @@ class _NewsState extends State<News> {
       appBar: CustomAppBar(
         scaffoldKey: _scaffoldKey,
       ),
-      drawer: CustomDrawer(), // Your custom drawer widget
+      drawer: CustomDrawer(widget.userTypeDisplay, widget.userName), // Your custom drawer widget
       body: OverlayLoaderWithAppIcon(
           overlayBackgroundColor: Colors.transparent,
           isLoading: widget.isLoading,

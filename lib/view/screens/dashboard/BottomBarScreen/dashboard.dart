@@ -17,14 +17,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../constant.dart';
 
 class Dashboard extends StatefulWidget {
-  Dashboard();
+  bool isLoading;
+String user;
+String userTypeDisplay;
+  Dashboard({required this.isLoading, required  this.user, required this.userTypeDisplay});
   @override
   State<Dashboard> createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
   final AuthRepo authRepo = AuthRepo(apiClient: ApiClient());
-  bool isLoading = true;
+ // bool isLoading = true;
   final List<Map<String, dynamic>> dashboardData = [
     {
       'title': 'Today',
@@ -91,17 +94,12 @@ class _DashboardState extends State<Dashboard> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>(); // Create GlobalKey
-      bool errorLod = false;
-      String userName  = '';
-        String userStatus = '';
-          String userTypeDisplay = '';
-            String userEmail  = '';
-             String authToken  = '';
+  
 
   @override
   void initState() {
     super.initState();
-    loadSessionData();
+  
   
   }
 
@@ -109,64 +107,7 @@ class _DashboardState extends State<Dashboard> {
   void dispose() {
     super.dispose();
   }
-    Future<void> checkConnectivity() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-
-    if (connectivityResult == ConnectivityResult.none) {
-      setState(() {
-        errorLod = true;
-      });
-    } else {
-      setState(() {
-        errorLod = false;
-      });
-    }
-  }
-
-Future<void> loadSessionData() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  // Fetch the specific fields based on new API response
-  final String? firstName = prefs.getString('first_name');
-  final String? lastName = prefs.getString('last_name');
-  final String? status = prefs.getString('status');
-  final String? token = prefs.getString('token');
-  final String? userType = prefs.getString('user_type');
-
-  // Check if firstName and lastName exist before proceeding
-  if (firstName != null && lastName != null) {
-    setState(() {
-      userName = '$firstName $lastName';  // Combine first and last name
-      userStatus = status ?? 'Unknown';   // Status handling with a fallback value
-      authToken = token ?? 'N/A';         // Token handling
-      userTypeDisplay = userType ?? 'Unknown';  // User type handling
-    });
-      isLoading = false;
-
-    // Additional actions like connectivity check can follow here
-    checkConnectivity();
-
-    await Future.delayed(Duration(seconds: 1));
-
-    if (errorLod == true) {
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.info,
-        animType: AnimType.bottomSlide,
-        title: 'No Internet Connection!',
-        desc: 'No active internet connection was found! \n The app will not run in offline mode, for the best experience, please connect to the internet!',
-        btnCancel: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.check),
-          color: Colors.green,
-        ),
-      ).show();
-    }
-  }
-}
-
+   
 
   void _showBottomSheet(BuildContext context, String clientName) {
     showModalBottomSheet(
@@ -252,18 +193,18 @@ Future<void> loadSessionData() async {
 
     return OverlayLoaderWithAppIcon(
         overlayBackgroundColor: Colors.transparent,
-        isLoading: isLoading,
+        isLoading:widget.isLoading,
         appIcon: CircularProgressIndicator(),
         child: Container(
           child: Scaffold(
             key: _scaffoldKey, // Assign key to Scaffold
 
             appBar: CustomAppBar(
-              userName: userName,
-              userType: userTypeDisplay,
+              userName:widget.user,
+              userType: widget.userTypeDisplay,
               scaffoldKey: _scaffoldKey,
             ),
-            drawer: CustomDrawer(), // Your custom drawer widget
+            drawer: CustomDrawer(widget.userTypeDisplay, widget.user), // Your custom drawer widget
             body: ListView(
               padding: EdgeInsets.all(16.0),
               children: [

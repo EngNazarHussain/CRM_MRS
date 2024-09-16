@@ -97,7 +97,7 @@ class DBManager {
       try {
         var decodedUser = jsonDecode(user);
         var _user = LogInModel.fromJson(decodedUser);
-        userEmail = _user.user.email ?? ""; // Fetch email from user data
+        userEmail = _user.data.user.email ?? ""; // Fetch email from user data inside the data field
       } catch (e) {
         debugPrint("catch:$e");
       }
@@ -115,7 +115,7 @@ class DBManager {
       try {
         var decodedUser = jsonDecode(user);
         var _user = LogInModel.fromJson(decodedUser);
-        userToken = _user.token; // Fetch token directly
+        userToken = _user.data.accessToken; // Fetch token from data.access_token
       } catch (e) {
         debugPrint("catch:$e");
       }

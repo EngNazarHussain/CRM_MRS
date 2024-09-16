@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 
 
 class ScheduleScreen extends StatefulWidget {
+  
+ String userTypeDisplay = '';
+  String userName = '';
+  ScheduleScreen(this.userTypeDisplay, this.userName);
   @override
   _ScheduleScreenState createState() => _ScheduleScreenState();
 }

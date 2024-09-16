@@ -33,9 +33,9 @@ Future<ResponseModel> login(String username, String password, String acceptSourc
     // Parse the response body using the updated LogInModel
     final jsonResponse = LogInModel.fromJson(response.body);
 
-    // Check if the login was successful based on message (you can modify the condition based on your logic)
+    // Check if the login was successful
     if (jsonResponse.message.toLowerCase() == "login successful") {
-      final token = jsonResponse.token;
+      final token = jsonResponse.data.accessToken;
       print("Token: $token");
 
       // Save the user data (if needed)
@@ -44,16 +44,18 @@ Future<ResponseModel> login(String username, String password, String acceptSourc
 
       // Prepare the session data to store in SharedPreferences
       final sessionData = {
-        'status': jsonResponse.user.status, // User status (e.g., active)
+        'status': jsonResponse.data.user.status, // User status (e.g., active)
         'message': jsonResponse.message, // Message from the response
-        'token': jsonResponse.token, // Token from the response
-        'first_name': jsonResponse.user.firstName, // User's first name
-        'last_name': jsonResponse.user.lastName, // User's last name
-        'email': jsonResponse.user.email, // User's email
-        'phone': jsonResponse.user.phone, // User's phone (can be null)
-        'user_type': jsonResponse.user.userType, // User type (admin)
-        'avatar': jsonResponse.user.avatar, // User's avatar (can be null)
-        'call_masking': jsonResponse.user.callMasking, // Call masking option
+        'token': token, // Access token from the response
+        'first_name': jsonResponse.data.user.firstName, // User's first name
+        'last_name': jsonResponse.data.user.lastName, // User's last name
+        'email': jsonResponse.data.user.email, // User's email
+        'phone': jsonResponse.data.user.phone, // User's phone (can be null)
+        'user_type': jsonResponse.data.user.userType, // User type (admin)
+        'avatar': jsonResponse.data.user.avatar, // User's avatar (can be null)
+        'call_masking': jsonResponse.data.user.callMasking, // Call masking option
+        'roles': jsonResponse.data.user.roles, // User roles
+        'permissions': jsonResponse.data.user.permissions, // User permissions
         'login_time': loginTimestamp, // Login timestamp
       };
 

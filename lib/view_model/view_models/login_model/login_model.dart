@@ -1,32 +1,57 @@
 class LogInModel {
+  final int status;
   final String message;
-  final User user;
-  final String token;
+  final Data data;
 
   LogInModel({
+    required this.status,
     required this.message,
-    required this.user,
-    required this.token,
+    required this.data,
   });
 
   factory LogInModel.fromJson(Map<String, dynamic> json) {
     return LogInModel(
+      status: json['status'],
       message: json['message'],
-      user: User.fromJson(json['user']),
-      token: json['token'],
+      data: Data.fromJson(json['data']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'status': status,
       'message': message,
+      'data': data.toJson(),
+    };
+  }
+}
+
+class Data {
+  final String accessToken;
+  final User user;
+
+  Data({
+    required this.accessToken,
+    required this.user,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      accessToken: json['access_token'],
+      user: User.fromJson(json['user']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'access_token': accessToken,
       'user': user.toJson(),
-      'token': token,
     };
   }
 }
 
 class User {
+  final int id;
   final String firstName;
   final String lastName;
   final String email;
@@ -35,17 +60,11 @@ class User {
   final String? avatar;
   final String status;
   final int callMasking;
-  final String? color;
-  final String? techOption;
-  final String? location;
-  final String? skills;
-  final String? note;
-  final String? address;
-  final String? city;
-  final String? state;
-  final String? zipCode;
+  final List<String> roles;
+  final List<String> permissions;
 
   User({
+    required this.id,
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -54,41 +73,29 @@ class User {
     this.avatar,
     required this.status,
     required this.callMasking,
-    this.color,
-    this.techOption,
-    this.location,
-    this.skills,
-    this.note,
-    this.address,
-    this.city,
-    this.state,
-    this.zipCode,
+    required this.roles,
+    required this.permissions,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      firstName: json['first_name'] ?? '',
-      lastName: json['last_name'] ?? '',
-      email: json['email'] ?? '',
+      id: json['id'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      email: json['email'],
       phone: json['phone'],
-      userType: json['user_type'] ?? '',
+      userType: json['user_type'],
       avatar: json['avatar'],
-      status: json['status'] ?? '',
-      callMasking: json['call_masking'] ?? 0,
-      color: json['color'],
-      techOption: json['tech_option'],
-      location: json['location'],
-      skills: json['skills'],
-      note: json['note'],
-      address: json['address'],
-      city: json['city'],
-      state: json['state'],
-      zipCode: json['zip_code'],
+      status: json['status'],
+      callMasking: json['call_masking'],
+      roles: List<String>.from(json['roles'] ?? []),
+      permissions: List<String>.from(json['permissions'] ?? []),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'first_name': firstName,
       'last_name': lastName,
       'email': email,
@@ -97,15 +104,8 @@ class User {
       'avatar': avatar,
       'status': status,
       'call_masking': callMasking,
-      'color': color,
-      'tech_option': techOption,
-      'location': location,
-      'skills': skills,
-      'note': note,
-      'address': address,
-      'city': city,
-      'state': state,
-      'zip_code': zipCode,
+      'roles': roles,
+      'permissions': permissions,
     };
   }
 }
